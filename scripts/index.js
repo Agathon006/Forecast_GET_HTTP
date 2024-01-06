@@ -4,7 +4,15 @@ httpRequest.onload = function () {
   console.log(JSON.parse(httpRequest.responseText));
   document.querySelector('#city').textContent = parsedRequest.city.name;
   var currentDate = new Date();
-  document.querySelector('#time').textContent = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+  var hours = currentDate.getHours();
+  var minutes = currentDate.getMinutes();
+  if (hours < 10) {
+    hours = '0' + hours;
+  }
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+  document.querySelector('#time').textContent = `${hours}:${minutes}`;
   let currentIcon = document.createElement('img');
   currentIcon.src = `../images/${parsedRequest.list[0].weather[0].icon}.png`;
   document.querySelector('#weather-icon').appendChild(currentIcon);
